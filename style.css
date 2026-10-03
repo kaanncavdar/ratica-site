@@ -84,9 +84,9 @@ section { padding: 72px 0; }
 .fine { color: var(--ink-soft); font-size: 0.85rem; margin-top: 14px; }
 
 /* hero */
-.hero { padding: 48px 0 80px; overflow: hidden; }
+.hero { padding: 48px 0 80px; overflow-x: clip; }
 .hero-grid { display: grid; gap: 48px; align-items: center; }
-@media (min-width: 960px) { .hero-grid { grid-template-columns: 1.05fr 1fr; } }
+@media (min-width: 960px) { .hero-grid { grid-template-columns: 1.05fr 1fr; align-items: start; } }
 .lead { font-size: 1.2rem; color: var(--ink-soft); max-width: 32em; }
 .ink-hl { background: linear-gradient(transparent 58%, var(--yellow) 58%, var(--yellow) 92%, transparent 92%); padding: 0 0.1em; }
 @media (prefers-color-scheme: dark) { .ink-hl { background: none; color: var(--yellow); } }
@@ -103,7 +103,7 @@ section { padding: 72px 0; }
 }
 
 /* download box */
-.download { margin-top: 28px; max-width: 460px; }
+.download { position: relative; z-index: 5; margin-top: 28px; max-width: 460px; }
 .btn-dl {
   display: flex; flex-direction: column; gap: 2px; padding: 16px 24px; border-radius: var(--radius);
   background: var(--red); color: var(--red-ink); text-decoration: none; border: 2px solid var(--line);
@@ -114,7 +114,13 @@ section { padding: 72px 0; }
 .dl-label { font: 800 1.35rem var(--sans); }
 .dl-meta { font-size: 0.92rem; opacity: 0.92; }
 
-.other-os { margin-top: 18px; border: 2px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.other-os { position: relative; margin-top: 18px; border: 2px solid var(--line); border-radius: var(--radius); background: var(--card); }
+/* The open menu floats over the page: opening it never moves anything else. */
+.os-panel {
+  position: absolute; z-index: 20; left: -2px; right: -2px; top: calc(100% + 6px);
+  background: var(--card); border: 2px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); max-height: min(70vh, 420px); overflow-y: auto; padding-top: 6px;
+}
 .other-os summary {
   list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px;
   padding: 12px 18px; font-weight: 700;

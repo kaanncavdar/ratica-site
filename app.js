@@ -93,8 +93,14 @@ function setupHome() {
     label.textContent = os === "mobile" ? "Ratica is a desktop app" : "Download Ratica";
     meta.textContent = os === "mobile" ? "Open this page on your computer, or pick a system below" : "Choose your system below";
     other.open = true;
-    main.addEventListener("click", e => { e.preventDefault(); other.open = true; other.querySelector("a").focus(); });
+    main.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); other.open = true; other.querySelector(".os-list a").focus(); });
   }
+
+  // Close the menu with Escape or a click outside it.
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && other.open) { other.open = false; other.querySelector("summary").focus(); }
+  });
+  document.addEventListener("click", e => { if (other.open && !other.contains(e.target)) other.open = false; });
 
   const pkg = document.getElementById("pkg");
   const cmds = [["Homebrew (macOS)", PACKAGES.brew], ["winget (Windows)", PACKAGES.winget]].filter(([, c]) => c);
