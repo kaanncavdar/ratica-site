@@ -3,136 +3,254 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ratica – Translate PDF books with local AI</title>
-<meta name="description" content="Ratica is a free, open-source desktop app that translates PDF books on your own computer with a local AI model and keeps the original page layout. Nothing is uploaded.">
+<title>Ratica – Free offline PDF book translator that keeps the layout</title>
+<meta name="description" content="Ratica translates whole PDF books on your own computer with a local AI model and keeps the original page layout. Free and open source for Windows, macOS and Linux. Nothing is uploaded.">
 <link rel="canonical" href="https://ratica.kaancavdar.com/">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#f6f8f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#11232b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6efe1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17130f" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ratica">
-<meta property="og:title" content="Ratica – Translate PDF books with local AI">
-<meta property="og:description" content="Translate whole PDF books on your own computer and keep the original page layout. Free, open source, offline.">
+<meta property="og:title" content="Ratica – Read any PDF book in your language">
+<meta property="og:description" content="A free desktop app that translates whole PDF books on your computer with local AI and keeps every page's layout. Nothing is uploaded.">
 <meta property="og:url" content="https://ratica.kaancavdar.com/">
 <meta property="og:image" content="https://ratica.kaancavdar.com/assets/og-image.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
-<meta property="og:image:alt" content="Ratica: a book page in English next to the same page translated into Turkish">
+<meta property="og:image:alt" content="A book page in English next to the same page translated into Turkish by Ratica">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ratica – Translate PDF books with local AI">
-<meta name="twitter:description" content="Translate whole PDF books on your own computer and keep the original page layout. Free, open source, offline.">
+<meta name="twitter:title" content="Ratica – Read any PDF book in your language">
+<meta name="twitter:description" content="Translate whole PDF books on your own computer with local AI. The layout stays. Free and open source.">
 <meta name="twitter:image" content="https://ratica.kaancavdar.com/assets/og-image.png">
+<link rel="preload" as="image" href="assets/page-en.webp">
 <link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Ratica",
+  "description": "Desktop app that translates PDF books on the user's own computer with a local AI model (Gemma-4-E4B through llama.cpp) and writes the translation back into the original page layout. Also produces an EPUB. Nothing is uploaded.",
+  "applicationCategory": "UtilitiesApplication",
+  "applicationSubCategory": "PDF translator",
+  "operatingSystem": "Windows 10, Windows 11, macOS 12 or newer (Apple Silicon), Linux x64",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+  "url": "https://ratica.kaancavdar.com/",
+  "downloadUrl": "https://github.com/kaanncavdar/ratica/releases/latest",
+  "codeRepository": "https://github.com/kaanncavdar/ratica",
+  "image": "https://ratica.kaancavdar.com/assets/og-image.png",
+  "screenshot": "https://ratica.kaancavdar.com/assets/app-ready.webp",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "author": {"@type": "Person", "name": "Kaan Çavdar", "url": "https://kaancavdar.com"},
+  "featureList": [
+    "Translates text-based PDF books between 23 languages",
+    "Keeps the original page layout: headings, tables of contents, lists, figures, colours and formulas",
+    "Leaves code, URLs and formulas unchanged",
+    "Recognises the language of the book automatically",
+    "Writes a PDF in the original layout and an EPUB",
+    "Runs offline on a local GPU (CUDA, Metal or Vulkan); nothing is uploaded",
+    "Pause and resume"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Is Ratica free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Ratica is free and open source under the AGPL-3.0 license. There is no account, subscription or API key."}},
+    {"@type": "Question", "name": "Does Ratica upload my books?", "acceptedAnswer": {"@type": "Answer", "text": "No. Translation runs on your own computer. Ratica only goes online on first start to download its translation engine and AI model (about 5–6 GB). It never uploads your files or text."}},
+    {"@type": "Question", "name": "Which languages does Ratica support?", "acceptedAnswer": {"@type": "Answer", "text": "23 languages, in any direction: Azerbaijani, Bulgarian, Chinese (Simplified), Czech, Dutch, English, French, German, Greek, Hindi, Indonesian, Italian, Japanese, Korean, Polish, Portuguese, Romanian, Russian, Spanish, Swedish, Turkish, Ukrainian and Vietnamese."}},
+    {"@type": "Question", "name": "What computer do I need?", "acceptedAnswer": {"@type": "Answer", "text": "An NVIDIA GPU with 6 GB or more is recommended; Apple Silicon Macs are supported. AMD and Intel GPUs should work through Vulkan but are not tested yet. Without a GPU it works but is slow. About 6 GB of free disk space is needed."}},
+    {"@type": "Question", "name": "How long does a book take?", "acceptedAnswer": {"@type": "Answer", "text": "On an entry-level GPU with 6 GB of memory, a 200-page book takes about 30–45 minutes. Faster GPUs finish sooner."}},
+    {"@type": "Question", "name": "Can Ratica translate scanned PDFs or comics?", "acceptedAnswer": {"@type": "Answer", "text": "Not yet. Ratica translates PDFs that contain real text. Scanned pages need OCR, which is planned, and text inside images or speech bubbles stays in the original language for now."}}
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="top">
   <div class="wrap top-row">
-    <a class="brand" href="/" aria-label="Ratica home"><img src="assets/icon.svg" alt="" width="32" height="32"> Ratica</a>
+    <a class="brand" href="/" aria-label="Ratica home"><img src="assets/icon.svg" alt="" width="34" height="34"><span>Ratica</span></a>
     <nav aria-label="Main">
+      <a href="#see">See it</a>
       <a href="#how">How it works</a>
-      <a href="#download">Download</a>
-      <a href="https://github.com/kaanncavdar/ratica">GitHub</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/kaanncavdar/ratica" class="gh">GitHub</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
-  <section class="hero">
+
+  <!-- HERO + DOWNLOAD -->
+  <section class="hero" aria-labelledby="hero-title">
     <div class="wrap hero-grid">
-      <div>
-        <img class="hero-icon" src="assets/icon-192.png" alt="Ratica app icon" width="96" height="96">
-        <h1>Translate PDF books with local AI</h1>
-        <p class="lead">Ratica translates whole PDF books on your own computer and writes the translation back into the original pages. Private, offline, free and open source.</p>
-        <div class="actions">
-          <a class="btn primary" href="#download">Download</a>
-          <a class="btn" href="https://github.com/kaanncavdar/ratica">View on GitHub</a>
+      <div class="hero-text">
+        <p class="bubble">Nothing is uploaded</p>
+        <h1 id="hero-title">Read any book<br><span class="ink-hl">in your language.</span></h1>
+        <p class="lead">Ratica translates whole PDF books on your own computer with a local AI model, and keeps every page looking like the original. Free and open source.</p>
+
+        <div class="download" id="download">
+          <a class="btn-dl" id="dl-main" href="download.html">
+            <span class="dl-label" id="dl-main-label">Download Ratica</span>
+            <span class="dl-meta" id="dl-main-meta">Free · Windows, macOS, Linux</span>
+          </a>
+          <details class="other-os" id="other-os">
+            <summary><span id="other-label">Other systems and install options</span><span class="chev" aria-hidden="true"></span></summary>
+            <ul class="os-list">
+              <li><a href="download.html?os=mac" data-os="mac"><b>macOS</b><span>Apple Silicon (M1 or newer) · signed &amp; notarized</span></a></li>
+              <li><a href="download.html?os=win" data-os="win"><b>Windows</b><span>Windows 10/11 · installer</span></a></li>
+              <li><a href="download.html?os=linux" data-os="linux"><b>Linux</b><span>x64 · .tar.gz archive</span></a></li>
+            </ul>
+            <div class="pkg" id="pkg" hidden></div>
+            <p class="all"><a href="https://github.com/kaanncavdar/ratica/releases">All releases and release notes</a></p>
+          </details>
+          <p class="ver" id="ver" aria-live="polite"></p>
         </div>
-        <p class="note">Beta · Windows, macOS (Apple Silicon) and Linux</p>
       </div>
-      <figure class="shot">
-        <img src="assets/before-after.webp" alt="An English book page next to the same page translated into Turkish by Ratica, with the same headings, list, chart and note box" width="1210" height="903">
-        <figcaption>The same page, before and after. The layout stays.</figcaption>
-      </figure>
-    </div>
-  </section>
 
-  <section id="how" class="band">
-    <div class="wrap">
-      <h2>How it works</h2>
-      <ol class="steps">
-        <li><span class="num" aria-hidden="true">1</span><h3>Open a PDF</h3><p>Choose a book or drop it on the window. Ratica recognises the language it is written in.</p></li>
-        <li><span class="num" aria-hidden="true">2</span><h3>Pick a language</h3><p>Choose one of 23 languages and press Translate. You can pause and resume at any time.</p></li>
-        <li><span class="num" aria-hidden="true">3</span><h3>Get the translated book</h3><p>A PDF with the same layout as the original, and an EPUB for e-readers, saved next to your PDF.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="why">
-    <div class="wrap">
-      <h2>Why local</h2>
-      <div class="cards">
-        <div class="card"><h3>Private</h3><p>Everything runs on your computer. Ratica never uploads your files or text.</p></div>
-        <div class="card"><h3>No subscription, no API key</h3><p>No account and no per-page cost. The AI model runs on your own GPU.</p></div>
-        <div class="card"><h3>Works offline</h3><p>Ratica goes online once, on first start, to download its engine and model (about 5–6 GB). After that it works offline.</p></div>
-        <div class="card"><h3>Keeps the layout</h3><p>Headings, tables of contents, lists, figures, colours and formulas stay where they were. Code, URLs and formulas are left unchanged.</p></div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sheet sheet-back"><img src="assets/page-en.webp" alt="" width="900" height="760"></div>
+        <div class="sheet sheet-front"><img src="assets/page-tr.webp" alt="" width="900" height="760"></div>
+        <span class="stamp">Same layout</span>
       </div>
     </div>
   </section>
 
-  <section id="download" class="band">
+  <!-- BEFORE / AFTER -->
+  <section id="see" class="paper" aria-labelledby="see-title">
     <div class="wrap">
-      <h2>Download</h2>
-      <p>Free. Get the latest release for your system from GitHub.</p>
-      <div class="dl">
-        <a class="dl-card" href="https://github.com/kaanncavdar/ratica/releases/latest">
-          <h3>macOS</h3>
-          <p>Apple Silicon (M1 or newer), macOS 12 or newer. Signed and notarized by Apple.</p>
-          <span class="go">Download for macOS</span>
-        </a>
-        <a class="dl-card" href="https://github.com/kaanncavdar/ratica/releases/latest">
-          <h3>Windows</h3>
-          <p>Windows 10/11. The installer is not code-signed yet, so Windows may show a warning: choose <em>More info → Run anyway</em>.</p>
-          <span class="go">Download for Windows</span>
-        </a>
-        <a class="dl-card" href="https://github.com/kaanncavdar/ratica/releases/latest">
-          <h3>Linux</h3>
-          <p>x64, as a <code>.tar.gz</code> archive.</p>
-          <span class="go">Download for Linux</span>
-        </a>
+      <p class="kicker">See it</p>
+      <h2 id="see-title">The same page. Another language.</h2>
+      <p class="sub">Drag the handle. Headings, the list, the chart labels and the note box stay exactly where they were.</p>
+      <div class="langs" role="group" aria-label="Translation language">
+        <button type="button" class="lang on" data-lang="tr" aria-pressed="true">Türkçe</button>
+        <button type="button" class="lang" data-lang="es" aria-pressed="false">Español</button>
+        <button type="button" class="lang" data-lang="de" aria-pressed="false">Deutsch</button>
       </div>
-
-      <h3 class="req-title">System requirements</h3>
-      <table class="req">
-        <caption class="sr">Hardware support</caption>
-        <thead><tr><th scope="col">Hardware</th><th scope="col">Support</th></tr></thead>
-        <tbody>
-          <tr><td>NVIDIA GPU with 6 GB or more</td><td>Recommended (CUDA)</td></tr>
-          <tr><td>Apple Silicon Mac (M1 or newer)</td><td>Supported (Metal)</td></tr>
-          <tr><td>AMD or Intel GPU</td><td>Should work (Vulkan), not yet tested</td></tr>
-          <tr><td>No GPU</td><td>Works, but slow</td></tr>
-        </tbody>
-      </table>
-      <p class="note">About 6 GB of free disk space for the engine and the model. On an entry-level 6 GB GPU, a 200-page book takes about 30–45 minutes.</p>
+      <div class="compare" id="compare">
+        <img class="c-before" src="assets/page-en.webp" alt="Original page in English" width="900" height="760" loading="lazy">
+        <div class="c-after" id="c-after"><img id="c-after-img" src="assets/page-tr.webp" alt="The same page translated by Ratica" width="900" height="760" loading="lazy"></div>
+        <div class="c-handle" id="c-handle" aria-hidden="true"></div>
+        <span class="c-tag left">Original</span><span class="c-tag right" id="c-tag">Türkçe</span>
+        <label class="sr" for="c-range">Show more of the original or of the translation</label>
+        <input type="range" id="c-range" min="0" max="100" value="50">
+      </div>
+      <p class="fine">Demo page written for this site. Translated by Ratica 0.1 with the default model.</p>
     </div>
   </section>
 
-  <!-- TODO: a "Quality" section with the model comparison. The benchmark results are not published in the
-       repository yet (bench/RESULTS.md is kept private), so no numbers are shown here. -->
-
-  <section id="open-source">
+  <!-- HOW IT WORKS -->
+  <section id="how" aria-labelledby="how-title">
     <div class="wrap">
-      <h2>Open source</h2>
-      <p>Ratica is free software under the <a href="https://github.com/kaanncavdar/ratica/blob/main/LICENSE">AGPL-3.0</a> license. It is built with <a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a>, the <a href="https://huggingface.co/google/gemma-4-E4B-it">Gemma-4-E4B-it</a> model, <a href="https://github.com/pymupdf/PyMuPDF">PyMuPDF</a> and PySide6.</p>
-      <p>Help is welcome, especially hardware reports from AMD, Intel and Apple GPUs and feedback on translation quality in any language.</p>
-      <div class="actions">
+      <p class="kicker">How it works</p>
+      <h2 id="how-title">Three steps. No account.</h2>
+      <div class="how-grid">
+        <ol class="steps">
+          <li><span class="num">1</span><div><h3>Open a PDF</h3><p>Choose a book or drop it on the window. Ratica recognises the language it is written in.</p></div></li>
+          <li><span class="num">2</span><div><h3>Pick a language</h3><p>Choose one of 23 languages and press Translate. Pause and resume whenever you like; progress is saved.</p></div></li>
+          <li><span class="num">3</span><div><h3>Read the translated book</h3><p>You get a PDF in the original layout and an EPUB for e-readers, saved next to your PDF.</p></div></li>
+        </ol>
+        <div class="shots">
+          <figure class="shot"><img src="assets/app-ready.webp" alt="Ratica window with a book chosen, Spanish selected and the estimated time shown" width="620" height="450" loading="lazy"><figcaption>Choose a book and a language</figcaption></figure>
+          <figure class="shot"><img src="assets/app-done.webp" alt="Ratica window after a finished translation with buttons to open the PDF and the EPUB" width="620" height="450" loading="lazy"><figcaption>Open the PDF or the EPUB</figcaption></figure>
+        </div>
+      </div>
+      <p class="sub">On first start Ratica downloads its translation engine and AI model once (about 5–6 GB) and measures your computer's speed. After that it works offline.</p>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="paper" aria-labelledby="feat-title">
+    <div class="wrap">
+      <p class="kicker">Why Ratica</p>
+      <h2 id="feat-title">Made for long books, not snippets.</h2>
+      <div class="feats">
+        <article class="feat"><h3>Keeps the layout</h3><p>Every page stays where it was: headings, tables of contents, lists, figures, colours and page numbers.</p></article>
+        <article class="feat"><h3>Private by design</h3><p>The AI model runs on your computer. Your books and text are never uploaded.</p></article>
+        <article class="feat"><h3>No cost, no API key</h3><p>No account, no subscription and no per-page fee. Free and open source.</p></article>
+        <article class="feat"><h3>Code &amp; formulas stay intact</h3><p>Code, URLs and formulas are left exactly as they are, so technical books stay correct.</p></article>
+        <article class="feat"><h3>PDF and EPUB</h3><p>Read the translation as the original pages, or as an EPUB that reflows on phones and e-readers.</p></article>
+        <article class="feat"><h3>Uses your GPU</h3><p>Picks CUDA, Metal or Vulkan by itself and leaves room for your other work.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S NEW -->
+  <section aria-labelledby="new-title">
+    <div class="wrap news">
+      <div>
+        <p class="kicker">What's new</p>
+        <h2 id="new-title"><span id="new-version">Latest release</span></h2>
+        <p class="sub" id="new-date"></p>
+        <p><a class="link-arrow" id="new-link" href="https://github.com/kaanncavdar/ratica/releases/latest">Full release notes</a></p>
+      </div>
+      <div class="news-body" id="new-body">
+        <p>Loading the notes of the latest release… If nothing appears, read them on <a href="https://github.com/kaanncavdar/ratica/releases/latest">GitHub</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section class="paper" aria-labelledby="lang-title">
+    <div class="wrap">
+      <p class="kicker">Languages</p>
+      <h2 id="lang-title">23 languages, in any direction.</h2>
+      <ul class="chips">
+        <li>Azerbaijani</li><li>Bulgarian</li><li>Chinese (Simplified)</li><li>Czech</li><li>Dutch</li><li>English</li>
+        <li>French</li><li>German</li><li>Greek</li><li>Hindi</li><li>Indonesian</li><li>Italian</li><li>Japanese</li>
+        <li>Korean</li><li>Polish</li><li>Portuguese</li><li>Romanian</li><li>Russian</li><li>Spanish</li><li>Swedish</li>
+        <li>Turkish</li><li>Ukrainian</li><li>Vietnamese</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- REQUIREMENTS -->
+  <section aria-labelledby="req-title">
+    <div class="wrap">
+      <p class="kicker">Requirements</p>
+      <h2 id="req-title">Runs on the computer you have.</h2>
+      <div class="req">
+        <div class="req-row"><b>NVIDIA GPU, 6 GB or more</b><span class="tag good">Recommended · CUDA</span></div>
+        <div class="req-row"><b>Apple Silicon Mac (M1 or newer)</b><span class="tag good">Supported · Metal</span></div>
+        <div class="req-row"><b>AMD or Intel GPU</b><span class="tag try">Should work · Vulkan, not yet tested</span></div>
+        <div class="req-row"><b>No GPU</b><span class="tag slow">Works, but slow</span></div>
+      </div>
+      <p class="sub">Windows 10/11, macOS 12 or newer, or Linux, with about 6 GB of free disk space. On an entry-level 6 GB GPU a 200-page book takes about 30–45 minutes.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="paper" aria-labelledby="faq-title">
+    <div class="wrap narrow">
+      <p class="kicker">FAQ</p>
+      <h2 id="faq-title">Questions</h2>
+      <details class="qa"><summary>Is Ratica free?</summary><p>Yes. Ratica is free and open source under the AGPL-3.0 license. There is no account, subscription or API key.</p></details>
+      <details class="qa"><summary>Does Ratica upload my books?</summary><p>No. Translation runs on your own computer. Ratica only goes online on first start to download its translation engine and AI model (about 5–6 GB). It never uploads your files or text.</p></details>
+      <details class="qa"><summary>Which AI model does it use?</summary><p>Gemma-4-E4B-it (Apache 2.0) through llama.cpp. It was chosen after comparing several open models on translation quality, protection of code and URLs, speed and memory use.</p></details>
+      <details class="qa"><summary>How long does a book take?</summary><p>On an entry-level GPU with 6 GB of memory, a 200-page book takes about 30–45 minutes. Faster GPUs finish sooner. Without a GPU it takes many hours.</p></details>
+      <details class="qa"><summary>Can it translate scanned PDFs or comics?</summary><p>Not yet. Ratica translates PDFs that contain real text. Scanned pages need OCR, which is planned. Text inside images and speech bubbles stays in the original language for now.</p></details>
+      <details class="qa"><summary>Why does Windows show a warning?</summary><p>The Windows installer is not code-signed yet, so SmartScreen may warn the first time. Choose <em>More info → Run anyway</em>. The macOS app is signed and notarized by Apple.</p></details>
+      <details class="qa"><summary>How do I uninstall it?</summary><p>The engine and model live outside the app. Delete them from the bottom of Ratica's window, or let the Windows uninstaller remove them. Then remove the app as usual.</p></details>
+    </div>
+  </section>
+
+  <!-- OPEN SOURCE / CTA -->
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="wrap cta-box">
+      <h2 id="cta-title">Open source, built in the open.</h2>
+      <p>AGPL-3.0. Built with llama.cpp, Gemma, PyMuPDF and PySide6. Hardware reports and translation feedback in any language are very welcome.</p>
+      <div class="cta-actions">
+        <a class="btn solid" href="#download">Download</a>
         <a class="btn" href="https://github.com/kaanncavdar/ratica">Source code</a>
         <a class="btn" href="https://github.com/kaanncavdar/ratica/issues">Report a problem</a>
-        <a class="btn" href="https://github.com/kaanncavdar/ratica#contributing">Contributing</a>
       </div>
     </div>
   </section>
@@ -141,8 +259,9 @@
 <footer class="foot">
   <div class="wrap foot-row">
     <p>© Kaan Çavdar · <a href="https://kaancavdar.com">kaancavdar.com</a></p>
-    <p><a href="https://github.com/kaanncavdar/ratica">GitHub</a></p>
+    <p><a href="https://github.com/kaanncavdar/ratica">GitHub</a> · <a href="https://github.com/kaanncavdar/ratica/blob/main/LICENSE">AGPL-3.0</a></p>
   </div>
 </footer>
+<script src="app.js" defer></script>
 </body>
 </html>

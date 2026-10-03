@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thanks for downloading Ratica</title>
+<meta name="description" content="Your download of Ratica, the free offline PDF book translator, is starting. First steps for Windows, macOS and Linux.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://ratica.kaancavdar.com/download.html">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="download">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/" aria-label="Ratica home"><img src="assets/icon.svg" alt="" width="34" height="34"><span>Ratica</span></a>
+    <nav aria-label="Main"><a href="/#faq">FAQ</a><a href="https://github.com/kaanncavdar/ratica" class="gh">GitHub</a></nav>
+  </div>
+</header>
+
+<main id="main" class="thanks">
+  <div class="wrap">
+    <div class="card-big">
+      <p class="bubble">Thank you!</p>
+      <h1 id="t-title" style="font-size:clamp(2rem,6vw,3.2rem)">Thanks for downloading Ratica!</h1>
+      <p class="lead" id="status" aria-live="polite">Your download should start in a moment.</p>
+      <p id="didnt">Didn't start?</p>
+      <a class="btn-dl" id="manual" href="https://github.com/kaanncavdar/ratica/releases/latest">
+        <span class="dl-label" id="manual-label">Download manually</span>
+        <span class="dl-meta">From the latest release on GitHub</span>
+      </a>
+
+      <h2 id="first-steps" style="font-size:1.6rem">First steps</h2>
+      <ol data-steps="mac" hidden>
+        <li>Open the downloaded <code>.dmg</code> and drag <b>Ratica</b> onto <b>Applications</b>.</li>
+        <li>Open Ratica from Applications. It is signed and notarized by Apple.</li>
+        <li>Click <b>Download and set up</b>: Ratica downloads its engine and AI model once (about 5–6 GB).</li>
+        <li>Choose a PDF, pick a language and press <b>Translate</b>.</li>
+      </ol>
+      <ol data-steps="win" hidden>
+        <li>Run the downloaded installer. The installer is not code-signed yet, so Windows may show <em>"Windows protected your PC"</em>: choose <b>More info → Run anyway</b>.</li>
+        <li>Start Ratica and click <b>Download and set up</b>: it downloads its engine and AI model once (about 5–6 GB).</li>
+        <li>Choose a PDF, pick a language and press <b>Translate</b>.</li>
+      </ol>
+      <ol data-steps="linux" hidden>
+        <li>Unpack the archive: <code>tar xzf Ratica-*-Linux-x64.tar.gz</code></li>
+        <li>Run <code>./Ratica/Ratica</code> and click <b>Download and set up</b> (about 5–6 GB, once).</li>
+        <li>Choose a PDF, pick a language and press <b>Translate</b>.</li>
+      </ol>
+      <p class="sub">Questions or a problem? See the <a href="/#faq">FAQ</a> or <a href="https://github.com/kaanncavdar/ratica/issues">report it on GitHub</a>.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <p>© Kaan Çavdar · <a href="https://kaancavdar.com">kaancavdar.com</a></p>
+    <p><a href="https://github.com/kaanncavdar/ratica">GitHub</a></p>
+  </div>
+</footer>
+<script src="app.js" defer></script>
+</body>
+</html>
